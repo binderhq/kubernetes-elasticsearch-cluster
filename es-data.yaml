@@ -6,7 +6,7 @@ metadata:
     component: elasticsearch
     role: data
 spec:
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -32,23 +32,30 @@ spec:
           capabilities:
             add:
               - IPC_LOCK
-        image: quay.io/pires/docker-elasticsearch-kubernetes:5.2.0
+        image: binderhq/elasticsearch:5.2.0
         imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 2048Mi
         env:
         - name: NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
         - name: "CLUSTER_NAME"
-          value: "myesdb"
+          value: "binder-elasticsearch-cluster"
         - name: NODE_MASTER
           value: "false"
         - name: NODE_INGEST
           value: "false"
         - name: HTTP_ENABLE
           value: "false"
+        - name: NUMBER_OF_SHARDS
+          value: 6
+        - name: NUMBER_OF_REPLICAS
+          value: 2
         - name: "ES_JAVA_OPTS"
-          value: "-Xms256m -Xmx256m"
+          value: "-Xms1024m -Xmx1024m"
         ports:
         - containerPort: 9300
           name: transport
