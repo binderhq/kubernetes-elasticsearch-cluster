@@ -51,9 +51,9 @@ spec:
         - name: HTTP_ENABLE
           value: "false"
         - name: NUMBER_OF_SHARDS
-          value: 6
+          value: "6"
         - name: NUMBER_OF_REPLICAS
-          value: 2
+          value: "2"
         - name: "ES_JAVA_OPTS"
           value: "-Xms1024m -Xmx1024m"
         ports:
