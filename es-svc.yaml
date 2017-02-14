@@ -13,4 +13,5 @@ spec:
   ports:
   - name: http
     port: 9200
+    nodePort: 30222
     protocol: TCP

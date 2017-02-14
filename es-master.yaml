@@ -1,12 +1,11 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: es-master
   labels:
     component: elasticsearch
     role: master
 spec:
-  replicas: 3
   template:
     metadata:
       labels:

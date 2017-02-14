@@ -1,12 +1,11 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: es-client
   labels:
     component: elasticsearch
     role: client
 spec:
-  replicas: 3
   template:
     metadata:
       labels:
@@ -62,6 +61,17 @@ spec:
         volumeMounts:
         - name: storage
           mountPath: /data
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9200
+          # length of time to wait for a pod to initialize
+          # after pod startup, before applying health checking
+          initialDelaySeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 3
+          periodSeconds: 1
+          failureThreshold: 2
       volumes:
           - emptyDir:
               medium: ""
