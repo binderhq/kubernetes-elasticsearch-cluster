@@ -72,6 +72,17 @@ spec:
           successThreshold: 3
           periodSeconds: 1
           failureThreshold: 2
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 9200
+          # length of time to wait for a pod to initialize
+          # after pod startup, before applying health checking
+          initialDelaySeconds: 20
+          timeoutSeconds: 1
+          successThreshold: 1
+          periodSeconds: 1
+          failureThreshold: 2
       volumes:
           - emptyDir:
               medium: ""
