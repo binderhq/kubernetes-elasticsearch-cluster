@@ -64,5 +64,6 @@ spec:
           mountPath: /data
       volumes:
           - emptyDir:
-              medium: ""
-            name: "storage"
+          hostPath:
+            # directory location on host
+            path: /var/lib/docker/es-data
