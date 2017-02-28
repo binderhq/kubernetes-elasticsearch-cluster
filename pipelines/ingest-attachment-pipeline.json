@@ -4,6 +4,7 @@
     {
       "foreach": {
         "field": "attachments",
+        "ignore_failure" : true,
         "processor": {
           "attachment": {
             "target_field": "_ingest._value.attachment",
